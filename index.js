@@ -24,15 +24,44 @@ function playRound() {
 
   if (humanChoice === computerChoice) {
     console.log("It's a tie!");
+    return "tie";
   } else if (
     (humanChoice === "rock" && computerChoice === "scissors") ||
     (humanChoice === "paper" && computerChoice === "rock") ||
     (humanChoice === "scissors" && computerChoice === "paper")
   ) {
-    console.log("You win!");
+    console.log("You win this round!");
+    return "human";
   } else {
-    console.log("Computer wins!");
+    console.log("Computer wins this round!");
+    return "computer";
   }
 }
 
-playRound();
+function playBestOfFive() {
+  let humanWins = 0;
+  let computerWins = 0;
+
+  for (let round = 1; round <= 5; round++) {
+    console.log(`\nRound ${round}`);
+    const result = playRound();
+
+    if (result === "human") {
+      humanWins++;
+    } else if (result === "computer") {
+      computerWins++;
+    }
+
+    console.log(`Score: You ${humanWins} - ${computerWins} Computer`);
+  }
+
+  if (humanWins > computerWins) {
+    console.log("You win the best-of-5 series!");
+  } else if (computerWins > humanWins) {
+    console.log("Computer wins the best-of-5 series!");
+  } else {
+    console.log("The series is tied!");
+  }
+}
+
+playBestOfFive();
